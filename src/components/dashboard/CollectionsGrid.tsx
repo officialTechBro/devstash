@@ -1,5 +1,6 @@
 import { Star, MoreHorizontal, Code2, Sparkles, Terminal, FileText, File, Image, Link } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import type { CollectionWithStats } from '@/lib/db/collections'
 
 const ICON_MAP: Record<string, React.ReactNode> = {
   'code-2': <Code2 className="h-3.5 w-3.5" />,
@@ -11,17 +12,8 @@ const ICON_MAP: Record<string, React.ReactNode> = {
   'link': <Link className="h-3.5 w-3.5" />,
 }
 
-interface Collection {
-  id: string
-  name: string
-  description: string
-  isFavorite: boolean
-  itemCount: number
-  icons: string[]
-}
-
 interface CollectionsGridProps {
-  collections: Collection[]
+  collections: CollectionWithStats[]
 }
 
 export function CollectionsGrid({ collections }: CollectionsGridProps) {
@@ -37,7 +29,8 @@ export function CollectionsGrid({ collections }: CollectionsGridProps) {
         {collections.map((col) => (
           <div
             key={col.id}
-            className="group relative rounded-lg border border-border bg-card p-4 hover:border-border/80 hover:bg-card/80 cursor-pointer transition-colors"
+            className="group relative rounded-lg border bg-card p-4 hover:bg-card/80 cursor-pointer transition-colors"
+            style={{ borderColor: col.primaryColor ?? 'hsl(var(--border))' }}
           >
             {/* Header */}
             <div className="flex items-start justify-between gap-2">
@@ -63,9 +56,15 @@ export function CollectionsGrid({ collections }: CollectionsGridProps) {
             <p className="mt-2 text-xs text-muted-foreground line-clamp-2">{col.description}</p>
 
             {/* Type icons */}
-            <div className="mt-3 flex items-center gap-1.5 text-muted-foreground">
-              {col.icons.map((icon, i) => (
-                <span key={i}>{ICON_MAP[icon] ?? null}</span>
+            <div className="mt-3 flex items-center gap-1.5">
+              {col.types.map((type, i) => (
+                <span
+                  key={i}
+                  style={{ color: type.color ?? undefined }}
+                  title={type.name}
+                >
+                  {type.icon ? (ICON_MAP[type.icon] ?? null) : null}
+                </span>
               ))}
             </div>
           </div>
