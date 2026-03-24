@@ -1,25 +1,10 @@
 # Current Feature
 
-## Neon PostgreSQL + Prisma Setup
-
 ## Status
-
-Complete — build passes, migration pending (`npx prisma migrate dev --name init` once DATABASE_URL is set)
 
 ## Goals
 
-- Set up Prisma 7 ORM with Neon PostgreSQL (serverless)
-- Create initial schema based on data models in project-overview.md
-- Include NextAuth models (Account, Session, VerificationToken)
-- Add appropriate indexes and cascade deletes
-- Use `prisma migrate dev` for all schema changes (never `db push`)
-- Configure separate development and production database branches
-
 ## Notes
-
-- Use Prisma 7 — has breaking changes from v6, read the upgrade guide before implementing
-- DATABASE_URL points to the development branch; production branch used separately
-- Always create migrations, never push schema directly unless specified
 
 ## History
 
@@ -29,3 +14,5 @@ Complete — build passes, migration pending (`npx prisma migrate dev --name ini
 - **2026-03-23** — Dashboard UI Phase 2 complete: collapsible sidebar with types/collections nav, favorites, all collections, user avatar area, mobile sheet drawer, tooltips on collapsed icons
 - **2026-03-23** — Dashboard UI Phase 3 complete: stats cards (items, collections, favorites), collections grid, pinned items and recent items sections
 - **2026-03-24** — Neon PostgreSQL + Prisma 7 setup complete: prisma/schema.prisma with all models + NextAuth models, prisma.config.ts, src/lib/prisma.ts singleton with @prisma/adapter-neon, build passes
+- **2026-03-24** — Initial migration applied (20260324105646_init), dev database seeded with 1 user, 7 system item types, 6 collections, 6 items, 15 tags; scripts/test.db.ts added for DB verification
+- **2026-03-24** — Seed data rewritten per spec: demo@devstash.io user (bcrypt password), 7 system item types with Lucide icons, 5 collections (React Patterns, AI Workflows, DevOps, Terminal Commands, Design Resources), 18 items, 24 tags; seed now wipes DB before re-seeding for idempotency; scripts/test.db.ts updated with richer output grouped by collection
