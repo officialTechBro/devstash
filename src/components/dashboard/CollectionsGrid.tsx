@@ -1,15 +1,15 @@
-import { Star, MoreHorizontal, Code2, Sparkles, Terminal, FileText, File, Image, Link } from 'lucide-react'
+import { Star, MoreHorizontal, Code2, Sparkles, Terminal, StickyNote, File, Image, Link } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import type { CollectionWithStats } from '@/lib/db/collections'
 
 const ICON_MAP: Record<string, React.ReactNode> = {
-  'code-2': <Code2 className="h-3.5 w-3.5" />,
-  'sparkles': <Sparkles className="h-3.5 w-3.5" />,
-  'terminal': <Terminal className="h-3.5 w-3.5" />,
-  'file-text': <FileText className="h-3.5 w-3.5" />,
-  'file': <File className="h-3.5 w-3.5" />,
-  'image': <Image className="h-3.5 w-3.5" />,
-  'link': <Link className="h-3.5 w-3.5" />,
+  'Code': <Code2 className="h-3.5 w-3.5" />,
+  'Sparkles': <Sparkles className="h-3.5 w-3.5" />,
+  'Terminal': <Terminal className="h-3.5 w-3.5" />,
+  'StickyNote': <StickyNote className="h-3.5 w-3.5" />,
+  'File': <File className="h-3.5 w-3.5" />,
+  'Image': <Image className="h-3.5 w-3.5" />,
+  'Link': <Link className="h-3.5 w-3.5" />,
 }
 
 interface CollectionsGridProps {
