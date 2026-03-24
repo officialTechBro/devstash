@@ -1,19 +1,23 @@
-import { mockItems, mockCollections, mockItemTypes } from '@/lib/mock-data'
+import { mockItems, mockItemTypes } from '@/lib/mock-data'
+import { getCollections } from '@/lib/db/collections'
 import { StatsCards } from '@/components/dashboard/StatsCards'
 import { CollectionsGrid } from '@/components/dashboard/CollectionsGrid'
 import { ItemRow } from '@/components/dashboard/ItemRow'
 
 const totalItems = mockItemTypes.reduce((sum, t) => sum + t.count, 0)
-const totalCollections = mockCollections.length
 const favoriteItems = mockItems.filter((i) => i.isFavorite).length
-const favoriteCollections = mockCollections.filter((c) => c.isFavorite).length
 
 const pinnedItems = mockItems.filter((i) => i.isPinned)
 const recentItems = [...mockItems]
   .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
   .slice(0, 10)
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  const collections = await getCollections()
+
+  const totalCollections = collections.length
+  const favoriteCollections = collections.filter((c) => c.isFavorite).length
+
   return (
     <div className="space-y-8">
       {/* Header */}
@@ -31,7 +35,7 @@ export default function DashboardPage() {
       />
 
       {/* Collections */}
-      <CollectionsGrid collections={mockCollections} />
+      <CollectionsGrid collections={collections} />
 
       {/* Pinned Items */}
       {pinnedItems.length > 0 && (
