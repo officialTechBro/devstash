@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Star, Pin, Code2, Sparkles, Terminal, StickyNote, File, Image, Link } from 'lucide-react'
 import { ItemDetailDrawer, type DrawerItem } from '@/components/dashboard/ItemDetailDrawer'
 
-const ICON_MAP: Record<string, React.ReactNode> = {
+const ROW_ICON_MAP: Record<string, React.ReactNode> = {
   'code-2': <Code2 className="h-3.5 w-3.5" />,
   'sparkles': <Sparkles className="h-3.5 w-3.5" />,
   'terminal': <Terminal className="h-3.5 w-3.5" />,
@@ -14,14 +14,15 @@ const ICON_MAP: Record<string, React.ReactNode> = {
   'link': <Link className="h-3.5 w-3.5" />,
 }
 
-const TYPE_ICON_MAP: Record<string, { icon: string; color: string; typeName: string; typeIcon: string }> = {
-  type_snippet: { icon: 'code-2', color: '#3b82f6', typeName: 'Snippet', typeIcon: 'Code' },
-  type_prompt:  { icon: 'sparkles', color: '#a855f7', typeName: 'Prompt', typeIcon: 'Sparkles' },
-  type_command: { icon: 'terminal', color: '#f59e0b', typeName: 'Command', typeIcon: 'Terminal' },
-  type_note:    { icon: 'sticky-note', color: '#22c55e', typeName: 'Note', typeIcon: 'StickyNote' },
-  type_file:    { icon: 'file', color: '#64748b', typeName: 'File', typeIcon: 'File' },
-  type_image:   { icon: 'image', color: '#ec4899', typeName: 'Image', typeIcon: 'Image' },
-  type_url:     { icon: 'link', color: '#06b6d4', typeName: 'URL', typeIcon: 'Link' },
+// Maps DB icon names (Lucide kebab-case) to the drawer's ICON_MAP keys
+const DRAWER_ICON_KEY: Record<string, string> = {
+  'code-2': 'Code',
+  'sparkles': 'Sparkles',
+  'terminal': 'Terminal',
+  'sticky-note': 'StickyNote',
+  'file': 'File',
+  'image': 'Image',
+  'link': 'Link',
 }
 
 export interface Item {
@@ -32,6 +33,8 @@ export interface Item {
   language: string | null
   typeId: string
   typeName: string
+  typeIcon: string | null
+  typeColor: string | null
   collectionName: string | null
   tags: string[]
   isFavorite: boolean
@@ -50,7 +53,9 @@ function formatDate(dateStr: string) {
 
 export function ItemRow({ item }: ItemRowProps) {
   const [drawerOpen, setDrawerOpen] = useState(false)
-  const typeInfo = TYPE_ICON_MAP[item.typeId]
+
+  const icon = item.typeIcon ?? 'file'
+  const color = item.typeColor ?? '#64748b'
 
   const drawerItem: DrawerItem = {
     id: item.id,
@@ -59,9 +64,9 @@ export function ItemRow({ item }: ItemRowProps) {
     content: item.content,
     language: item.language,
     typeId: item.typeId,
-    typeName: typeInfo?.typeName ?? item.typeName,
-    typeIcon: typeInfo?.typeIcon ?? 'File',
-    typeColor: typeInfo?.color ?? '#64748b',
+    typeName: item.typeName,
+    typeIcon: DRAWER_ICON_KEY[icon] ?? 'File',
+    typeColor: color,
     collectionName: item.collectionName,
     tags: item.tags,
     isFavorite: item.isFavorite,
@@ -79,9 +84,9 @@ export function ItemRow({ item }: ItemRowProps) {
         {/* Type icon */}
         <div
           className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-md"
-          style={{ backgroundColor: typeInfo ? `${typeInfo.color}20` : '#64748b20', color: typeInfo?.color ?? '#64748b' }}
+          style={{ backgroundColor: `${color}20`, color }}
         >
-          {typeInfo ? (ICON_MAP[typeInfo.icon] ?? <File className="h-3.5 w-3.5" />) : <File className="h-3.5 w-3.5" />}
+          {ROW_ICON_MAP[icon] ?? <File className="h-3.5 w-3.5" />}
         </div>
 
         {/* Content */}
@@ -94,18 +99,22 @@ export function ItemRow({ item }: ItemRowProps) {
           {item.description && (
             <p className="mt-0.5 truncate text-xs text-muted-foreground">{item.description}</p>
           )}
-          {item.tags.length > 0 && (
-            <div className="mt-1.5 flex flex-wrap gap-1">
-              {item.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-md bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          )}
+          <div className="mt-1.5 flex flex-wrap gap-1">
+            <span
+              className="rounded-md px-1.5 py-0.5 text-[10px] font-medium"
+              style={{ backgroundColor: `${color}20`, color }}
+            >
+              {item.typeName}
+            </span>
+            {item.tags.map((tag) => (
+              <span
+                key={tag}
+                className="rounded-md bg-muted px-1.5 py-0.5 text-[10px] text-muted-foreground"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
         </div>
 
         {/* Date */}

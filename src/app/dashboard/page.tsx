@@ -1,21 +1,19 @@
-import { mockItems, mockItemTypes } from '@/lib/mock-data'
+export const dynamic = 'force-dynamic'
+
 import { getCollections } from '@/lib/db/collections'
+import { getPinnedItems, getRecentItems, getItemStats } from '@/lib/db/items'
 import { StatsCards } from '@/components/dashboard/StatsCards'
 import { CollectionsGrid } from '@/components/dashboard/CollectionsGrid'
 import { ItemRow } from '@/components/dashboard/ItemRow'
 
-const totalItems = mockItemTypes.reduce((sum, t) => sum + t.count, 0)
-const favoriteItems = mockItems.filter((i) => i.isFavorite).length
-
-const pinnedItems = mockItems.filter((i) => i.isPinned)
-const recentItems = [...mockItems]
-  .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-  .slice(0, 10)
-
 export default async function DashboardPage() {
-  const collections = await getCollections()
+  const [collections, pinnedItems, recentItems, itemStats] = await Promise.all([
+    getCollections(),
+    getPinnedItems(),
+    getRecentItems(),
+    getItemStats(),
+  ])
 
-  const totalCollections = collections.length
   const favoriteCollections = collections.filter((c) => c.isFavorite).length
 
   return (
@@ -28,9 +26,9 @@ export default async function DashboardPage() {
 
       {/* Stats */}
       <StatsCards
-        totalItems={totalItems}
-        totalCollections={totalCollections}
-        favoriteItems={favoriteItems}
+        totalItems={itemStats.totalItems}
+        totalCollections={collections.length}
+        favoriteItems={itemStats.favoriteItems}
         favoriteCollections={favoriteCollections}
       />
 

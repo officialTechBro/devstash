@@ -2,6 +2,8 @@
 
 ## Status
 
+Completed
+
 ## Goals
 
 ## Notes
@@ -19,3 +21,4 @@
 - **2026-03-24** — Dashboard collections wired to Neon DB: created src/lib/db/collections.ts with getCollections(), CollectionsGrid updated to use real data with type icons colored per DB color and card border color derived from most-used item type
 - **2026-03-24** — Item detail drawer implemented: clicking any item row opens a right-side Sheet drawer showing title, type/language badges, action buttons, description, content block, tags, collection, and created/updated dates
 - **2026-03-26** — Seed data finalized per spec: demo@devstash.io user, 7 system item types, 5 collections, 18 items (snippets, prompts, commands, links), 24 tags; seed is idempotent (wipes before re-seeding)
+- **2026-03-26** — Dashboard items wired to Neon DB: created src/lib/db/items.ts with getPinnedItems(), getRecentItems(), getItemStats(); ItemRow updated to use DB type icon/color directly; dashboard page fetches all data from DB, mock data fully replaced
