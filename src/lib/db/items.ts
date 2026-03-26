@@ -88,3 +88,33 @@ export async function getItemStats(): Promise<ItemStats> {
   ])
   return { totalItems, favoriteItems }
 }
+
+export interface SidebarItemType {
+  id: string
+  name: string
+  icon: string | null
+  color: string | null
+  count: number
+}
+
+const ITEM_TYPE_ORDER = ['Snippet', 'Prompt', 'Command', 'Note', 'File', 'Image', 'URL']
+
+export async function getItemTypes(): Promise<SidebarItemType[]> {
+  const types = await prisma.itemType.findMany({
+    where: { isSystem: true },
+    include: { _count: { select: { items: true } } },
+  })
+  return types
+    .map((t) => ({
+      id: t.id,
+      name: t.name,
+      icon: t.icon,
+      color: t.color,
+      count: t._count.items,
+    }))
+    .sort((a, b) => {
+      const ai = ITEM_TYPE_ORDER.indexOf(a.name)
+      const bi = ITEM_TYPE_ORDER.indexOf(b.name)
+      return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi)
+    })
+}
