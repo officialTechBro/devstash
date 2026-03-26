@@ -2,23 +2,9 @@
 
 ## Status
 
-Completed
-
 ## Goals
 
-Replace dummy collection data in the dashboard main area with real data from the Neon database using Prisma.
-
-- Create `src/lib/db/collections.ts` with data fetching functions
-- Fetch collections directly in server component
-- Collection card border color derived from most-used content type in that collection
-- Show small icons of all types in that collection
-- Keep the current design
-- Update collection stats display
-
 ## Notes
-
-- Do not add items underneath the collections yet — that's a separate feature
-- Reference: `context/screenshots/dashboard-ui-main.png`
 
 ## History
 
@@ -32,3 +18,4 @@ Replace dummy collection data in the dashboard main area with real data from the
 - **2026-03-24** — Seed data rewritten per spec: demo@devstash.io user (bcrypt password), 7 system item types with Lucide icons, 5 collections (React Patterns, AI Workflows, DevOps, Terminal Commands, Design Resources), 18 items, 24 tags; seed now wipes DB before re-seeding for idempotency; scripts/test.db.ts updated with richer output grouped by collection
 - **2026-03-24** — Dashboard collections wired to Neon DB: created src/lib/db/collections.ts with getCollections(), CollectionsGrid updated to use real data with type icons colored per DB color and card border color derived from most-used item type
 - **2026-03-24** — Item detail drawer implemented: clicking any item row opens a right-side Sheet drawer showing title, type/language badges, action buttons, description, content block, tags, collection, and created/updated dates
+- **2026-03-26** — Seed data finalized per spec: demo@devstash.io user, 7 system item types, 5 collections, 18 items (snippets, prompts, commands, links), 24 tags; seed is idempotent (wipes before re-seeding)
