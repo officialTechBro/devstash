@@ -1,20 +1,12 @@
-# Current Feature: Add Pro Badge to Sidebar
+# Current Feature
 
 ## Status
 
-In Progress
+Completed
 
 ## Goals
 
-- Add a PRO badge next to the "File" and "Image" item types in the sidebar
-- Use ShadCN UI Badge component
-- Badge should be clean and subtle
-- Badge text must be uppercase: PRO
-
 ## Notes
-
-- Only the File and Image types get the PRO badge (not all types)
-- Badge should not be distracting — keep it minimal
 
 ## History
 
@@ -31,3 +23,4 @@ In Progress
 - **2026-03-26** — Seed data finalized per spec: demo@devstash.io user, 7 system item types, 5 collections, 18 items (snippets, prompts, commands, links), 24 tags; seed is idempotent (wipes before re-seeding)
 - **2026-03-26** — Dashboard items wired to Neon DB: created src/lib/db/items.ts with getPinnedItems(), getRecentItems(), getItemStats(); ItemRow updated to use DB type icon/color directly; dashboard page fetches all data from DB, mock data fully replaced
 - **2026-03-26** — Stats & sidebar wired to Neon DB: added getItemTypes() with custom sort order; layout split into server component + DashboardShell client component; SidebarContent now accepts real item types and collections as props; colored circles for non-favorite collections; "View all collections" link added; mock data fully removed
+- **2026-03-28** — PRO badge added to File and Image types in sidebar: ShadCN Badge component installed; subtle secondary-variant badge with PRO uppercase text renders inline next to the type name in the expanded sidebar only
