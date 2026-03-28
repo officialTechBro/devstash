@@ -9,6 +9,7 @@ import {
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import type { SidebarItemType } from '@/lib/db/items'
@@ -99,6 +100,9 @@ export function SidebarContent({ collapsed = false, onNavigate, itemTypes, colle
                       >
                         <Icon className="h-3.5 w-3.5 shrink-0" style={{ color: type.color ?? undefined }} />
                         <span className="flex-1 truncate">{type.name}</span>
+                        {(['file', 'image'].includes(type.name.toLowerCase())) && (
+                          <Badge variant="secondary" className="h-4 px-1 text-[9px] font-semibold tracking-wide">PRO</Badge>
+                        )}
                         <span className="text-xs text-muted-foreground">{type.count}</span>
                       </Link>
                     )}
