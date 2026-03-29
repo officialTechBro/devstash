@@ -1,6 +1,6 @@
 "use client"
 
-import { Star, Pin, Copy, Pencil, Trash2, Code2, Sparkles, Terminal, StickyNote, File, Image, Link } from 'lucide-react'
+import { Star, Pin, Copy, Pencil, Trash2, Code2, Sparkles, Terminal, StickyNote, File, Image as ImageIcon, Link } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
   Sheet,
@@ -14,7 +14,7 @@ const ICON_MAP: Record<string, React.ReactNode> = {
   'Terminal': <Terminal className="h-4 w-4" />,
   'StickyNote': <StickyNote className="h-4 w-4" />,
   'File': <File className="h-4 w-4" />,
-  'Image': <Image className="h-4 w-4" />,
+  'Image': <ImageIcon className="h-4 w-4" />,
   'Link': <Link className="h-4 w-4" />,
 }
 

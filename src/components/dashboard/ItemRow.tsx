@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from 'react'
-import { Star, Pin, Code2, Sparkles, Terminal, StickyNote, File, Image, Link } from 'lucide-react'
+import { Star, Pin, Code2, Sparkles, Terminal, StickyNote, File, Image as ImageIcon, Link } from 'lucide-react'
 import { ItemDetailDrawer, type DrawerItem } from '@/components/dashboard/ItemDetailDrawer'
 
 const ROW_ICON_MAP: Record<string, React.ReactNode> = {
@@ -10,7 +10,7 @@ const ROW_ICON_MAP: Record<string, React.ReactNode> = {
   'terminal': <Terminal className="h-3.5 w-3.5" />,
   'sticky-note': <StickyNote className="h-3.5 w-3.5" />,
   'file': <File className="h-3.5 w-3.5" />,
-  'image': <Image className="h-3.5 w-3.5" />,
+  'image': <ImageIcon className="h-3.5 w-3.5" />,
   'link': <Link className="h-3.5 w-3.5" />,
 }
 

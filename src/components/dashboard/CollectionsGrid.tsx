@@ -1,4 +1,4 @@
-import { Star, MoreHorizontal, Code2, Sparkles, Terminal, StickyNote, File, Image, Link } from 'lucide-react'
+import { Star, MoreHorizontal, Code2, Sparkles, Terminal, StickyNote, File, Image as ImageIcon, Link } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import type { CollectionWithStats } from '@/lib/db/collections'
 
@@ -8,7 +8,7 @@ const ICON_MAP: Record<string, React.ReactNode> = {
   'Terminal': <Terminal className="h-3.5 w-3.5" />,
   'StickyNote': <StickyNote className="h-3.5 w-3.5" />,
   'File': <File className="h-3.5 w-3.5" />,
-  'Image': <Image className="h-3.5 w-3.5" />,
+  'Image': <ImageIcon className="h-3.5 w-3.5" />,
   'Link': <Link className="h-3.5 w-3.5" />,
 }
 
