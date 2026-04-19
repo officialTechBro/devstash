@@ -2,7 +2,7 @@
 
 ## Status
 
-Completed
+Not Started
 
 ## Goals
 
@@ -24,3 +24,4 @@ Completed
 - **2026-03-26** — Dashboard items wired to Neon DB: created src/lib/db/items.ts with getPinnedItems(), getRecentItems(), getItemStats(); ItemRow updated to use DB type icon/color directly; dashboard page fetches all data from DB, mock data fully replaced
 - **2026-03-26** — Stats & sidebar wired to Neon DB: added getItemTypes() with custom sort order; layout split into server component + DashboardShell client component; SidebarContent now accepts real item types and collections as props; colored circles for non-favorite collections; "View all collections" link added; mock data fully removed
 - **2026-03-28** — PRO badge added to File and Image types in sidebar: ShadCN Badge component installed; subtle secondary-variant badge with PRO uppercase text renders inline next to the type name in the expanded sidebar only
+- **2026-04-19** — Code quality quick wins: fixed ITEM_TYPE_ORDER case mismatch (PascalCase vs DB lowercase), fixed Prisma singleton not caching in production, fixed array index React key in CollectionsGrid, extracted formatDate to shared utils (formatDateShort/formatDateLong)
