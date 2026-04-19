@@ -57,9 +57,9 @@ export function CollectionsGrid({ collections }: CollectionsGridProps) {
 
             {/* Type icons */}
             <div className="mt-3 flex items-center gap-1.5">
-              {col.types.map((type, i) => (
+              {col.types.map((type) => (
                 <span
-                  key={i}
+                  key={type.name}
                   style={{ color: type.color ?? undefined }}
                   title={type.name}
                 >

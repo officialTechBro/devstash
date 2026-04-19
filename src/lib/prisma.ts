@@ -13,7 +13,6 @@ function createPrismaClient() {
 // In dev, cache on globalThis to survive HMR — but only if DATABASE_URL is set.
 // If the URL is missing or changed, create a fresh client instead of reusing a stale one.
 function getPrismaClient() {
-  if (process.env.NODE_ENV === "production") return createPrismaClient();
   if (!globalForPrisma.prisma) {
     globalForPrisma.prisma = createPrismaClient();
   }

@@ -1,6 +1,7 @@
 "use client"
 
 import { Star, Pin, Copy, Pencil, Trash2, Code2, Sparkles, Terminal, StickyNote, File, Image as ImageIcon, Link } from 'lucide-react'
+import { formatDateLong } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import {
   Sheet,
@@ -42,13 +43,6 @@ interface ItemDetailDrawerProps {
   onClose: () => void
 }
 
-function formatDate(dateStr: string) {
-  return new Date(dateStr).toLocaleDateString('en-US', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric',
-  })
-}
 
 export function ItemDetailDrawer({ item, open, onClose }: ItemDetailDrawerProps) {
   if (!item) return null
@@ -152,11 +146,11 @@ export function ItemDetailDrawer({ item, open, onClose }: ItemDetailDrawerProps)
             <div className="space-y-1">
               <div className="flex items-center justify-between text-xs">
                 <span className="text-muted-foreground">Created</span>
-                <span className="text-foreground/80">{formatDate(item.createdAt)}</span>
+                <span className="text-foreground/80">{formatDateLong(item.createdAt)}</span>
               </div>
               <div className="flex items-center justify-between text-xs">
                 <span className="text-muted-foreground">Updated</span>
-                <span className="text-foreground/80">{formatDate(item.updatedAt)}</span>
+                <span className="text-foreground/80">{formatDateLong(item.updatedAt)}</span>
               </div>
             </div>
           </div>

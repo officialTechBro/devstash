@@ -97,7 +97,7 @@ export interface SidebarItemType {
   count: number
 }
 
-const ITEM_TYPE_ORDER = ['Snippet', 'Prompt', 'Command', 'Note', 'File', 'Image', 'URL']
+const ITEM_TYPE_ORDER = ['snippet', 'prompt', 'command', 'note', 'file', 'image', 'url']
 
 export async function getItemTypes(): Promise<SidebarItemType[]> {
   const types = await prisma.itemType.findMany({
@@ -113,8 +113,8 @@ export async function getItemTypes(): Promise<SidebarItemType[]> {
       count: t._count.items,
     }))
     .sort((a, b) => {
-      const ai = ITEM_TYPE_ORDER.indexOf(a.name)
-      const bi = ITEM_TYPE_ORDER.indexOf(b.name)
+      const ai = ITEM_TYPE_ORDER.indexOf(a.name.toLowerCase())
+      const bi = ITEM_TYPE_ORDER.indexOf(b.name.toLowerCase())
       return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi)
     })
 }

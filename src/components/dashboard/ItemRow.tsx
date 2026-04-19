@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Star, Pin, Code2, Sparkles, Terminal, StickyNote, File, Image as ImageIcon, Link } from 'lucide-react'
 import { ItemDetailDrawer, type DrawerItem } from '@/components/dashboard/ItemDetailDrawer'
+import { formatDateShort } from '@/lib/utils'
 
 const ROW_ICON_MAP: Record<string, React.ReactNode> = {
   'code-2': <Code2 className="h-3.5 w-3.5" />,
@@ -47,9 +48,6 @@ interface ItemRowProps {
   item: Item
 }
 
-function formatDate(dateStr: string) {
-  return new Date(dateStr).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
-}
 
 export function ItemRow({ item }: ItemRowProps) {
   const [drawerOpen, setDrawerOpen] = useState(false)
@@ -118,7 +116,7 @@ export function ItemRow({ item }: ItemRowProps) {
         </div>
 
         {/* Date */}
-        <span className="shrink-0 text-[11px] text-muted-foreground">{formatDate(item.createdAt)}</span>
+        <span className="shrink-0 text-[11px] text-muted-foreground">{formatDateShort(item.createdAt)}</span>
       </div>
 
       <ItemDetailDrawer item={drawerItem} open={drawerOpen} onClose={() => setDrawerOpen(false)} />
