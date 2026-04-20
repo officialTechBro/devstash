@@ -107,6 +107,9 @@ model Item {
   @@index([userId])
   @@index([typeId])
   @@index([collectionId])
+  @@index([isPinned])
+  @@index([isFavorite])
+  @@index([createdAt])
 }
 
 model ItemType {
@@ -122,6 +125,7 @@ model ItemType {
   items Item[]
 
   @@index([userId])
+  @@index([isSystem])
 }
 
 model Collection {
@@ -161,4 +165,5 @@ model ItemTag {
   tag  Tag  @relation(fields: [tagId], references: [id], onDelete: Cascade)
 
   @@id([itemId, tagId])
+  @@index([tagId])
 }
