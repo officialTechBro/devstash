@@ -1,12 +1,25 @@
-# Current Feature
+# Current Feature: Auth Phase 2 — Credentials Provider (Email/Password)
 
 ## Status
 
-Not Started
+In Progress
 
 ## Goals
 
+- Add Credentials provider for email/password sign-in
+- Add password field to User model via migration (if not present)
+- Update `auth.config.ts` with Credentials placeholder (`authorize: () => null`)
+- Update `auth.ts` to override Credentials with bcrypt validation
+- Create `POST /api/auth/register` route (name, email, password, confirmPassword)
+- GitHub OAuth continues to work after changes
+
 ## Notes
+
+- Use bcryptjs for hashing (already installed)
+- Split config pattern: edge-safe placeholder in `auth.config.ts`, real logic in `auth.ts`
+- Registration validates passwords match, checks for existing user, hashes with bcryptjs, creates user
+- Return `{ success, error }` pattern from register route
+- Test: curl register → `/api/auth/signin` → verify redirect to `/dashboard`
 
 ## History
 
