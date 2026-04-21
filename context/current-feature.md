@@ -1,25 +1,12 @@
-# Current Feature: Auth Phase 2 — Credentials Provider (Email/Password)
+# Current Feature
 
 ## Status
 
-In Progress
+Not Started
 
 ## Goals
 
-- Add Credentials provider for email/password sign-in
-- Add password field to User model via migration (if not present)
-- Update `auth.config.ts` with Credentials placeholder (`authorize: () => null`)
-- Update `auth.ts` to override Credentials with bcrypt validation
-- Create `POST /api/auth/register` route (name, email, password, confirmPassword)
-- GitHub OAuth continues to work after changes
-
 ## Notes
-
-- Use bcryptjs for hashing (already installed)
-- Split config pattern: edge-safe placeholder in `auth.config.ts`, real logic in `auth.ts`
-- Registration validates passwords match, checks for existing user, hashes with bcryptjs, creates user
-- Return `{ success, error }` pattern from register route
-- Test: curl register → `/api/auth/signin` → verify redirect to `/dashboard`
 
 ## History
 
@@ -39,3 +26,4 @@ In Progress
 - **2026-03-28** — PRO badge added to File and Image types in sidebar: ShadCN Badge component installed; subtle secondary-variant badge with PRO uppercase text renders inline next to the type name in the expanded sidebar only
 - **2026-04-19** — Code quality quick wins: fixed ITEM_TYPE_ORDER case mismatch (PascalCase vs DB lowercase), fixed Prisma singleton not caching in production, fixed array index React key in CollectionsGrid, extracted formatDate to shared utils (formatDateShort/formatDateLong)
 - **2026-04-20** — Auth Phase 1 complete: NextAuth v5 (next-auth@beta) installed with @auth/prisma-adapter; split config pattern (auth.config.ts edge-compatible + auth.ts with Prisma adapter); GitHub OAuth provider; Next.js 16 proxy at src/proxy.ts redirects unauthenticated users from /dashboard/* to sign-in with callbackUrl; Session type extended with user.id
+- **2026-04-21** — Auth Phase 2 complete: Credentials provider added with email/password sign-in; edge-safe placeholder in auth.config.ts, bcrypt validation override in auth.ts; POST /api/auth/register route with validation (match check, duplicate check, bcrypt hash); GitHub OAuth unaffected
