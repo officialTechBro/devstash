@@ -11,6 +11,13 @@ Read the following to get the full context of the project
 - @context/ai-interaction.md
 - @context/current-feature.md
 
+## Neon Database (MCP)
+
+- **Project**: Always use the `devstash` Neon project
+- **Branch**: Always use the `development` branch by default
+- **NEVER** run queries, migrations, or any operations against the `main` (production) branch unless explicitly told to
+- If unsure which branch to use, ask — default to `development`
+
 ## Commands
 
 - `npm run dev` — Start dev server (Next.js with Turbopack)
